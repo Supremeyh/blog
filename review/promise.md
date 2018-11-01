@@ -1,6 +1,5 @@
  # Promise 面试题
 
-
 ## 题目一
  ```
  const promise = new Promise((resolve, reject) => {
