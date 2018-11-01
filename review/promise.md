@@ -160,8 +160,88 @@ ajaxArray.forEach(function (item) {
 return sequence;
 
 ```
-
 ## 题目六
+
+```
+以下代码最后输出什么？
+
+setTimeout(function() {
+    console.log('1');
+})
+
+new Promise(function(resolve) {
+    console.log('2');
+}).then(function() {
+    console.log('3');
+})
+
+console.log('4');
+```
+解析：
+> macro-task(宏任务)：包括整体代码script，setTimeout，setInterval.
+> micro-task(微任务)：Promise，process.nextTick.
+> 不同类型的任务会进入对应的Event Queue，比如setTimeout和setInterval会进入相同的Event Queue。事件循环的顺序，决定js代码的执行顺序。进入整体代码(宏任务)后，开始第一次循环。接着执行所有的微任务。然后再次从宏任务开始，找到其中一个任务队列执行完毕，再执行所有的微任务。
+
+1 这段代码作为宏任务，进入主线程。
+2 先遇到setTimeout，那么将其回调函数注册后分发到宏任务Event Queue。
+3 接下来遇到了Promise，new Promise立即执行，then函数分发到微任务Event Queue。
+4 遇到console.log()，立即执行。
+5 好啦，整体代码script作为第一个宏任务执行结束，看看有哪些微任务？我们发现了then在微任务Event Queue里面，执行。
+6 ok，第一轮事件循环结束了，我们开始第二轮循环，当然要从宏任务Event Queue开始。我们发现了宏任务Event Queue中setTimeout对应的回调函数，立即执行。
+7 结束。
+答案：2 4 1
+
+## 题目七
+
+```
+以下代码最后输出什么？
+
+console.log('1');
+
+setTimeout(function() {
+    console.log('2');
+    process.nextTick(function() {
+        console.log('3');
+    })
+    new Promise(function(resolve) {
+        console.log('4');
+        resolve();
+    }).then(function() {
+        console.log('5')
+    })
+})
+process.nextTick(function() {
+    console.log('6');
+})
+new Promise(function(resolve) {
+    console.log('7');
+    resolve();
+}).then(function() {
+    console.log('8')
+})
+
+setTimeout(function() {
+    console.log('9');
+    process.nextTick(function() {
+        console.log('10');
+    })
+    new Promise(function(resolve) {
+        console.log('11');
+        resolve();
+    }).then(function() {
+        console.log('12')
+    })
+})
+
+```
+解析：javascript是一门单线程语言，Event Loop是js实现异步的一种方法，也是javascript的执行机制。
+javascript是一门单线程语言，在最新的HTML5中提出了Web-Worker，但javascript是单线程这一核心仍未改变。所以一切javascript版的"多线程"都是用单线程模拟出来的，不管是什么新框架新语法糖实现的所谓异步，其实都是用同步的方法去模拟的，牢牢把握住单线程这点非常重要。一切javascript多线程都是纸老虎！
+事件循环：任务分为两类：同步任务，异步任务。同步和异步任务分别进入不同的执行"场所"，同步的进入主线程，异步的进Event Table并注册函数。当指定的事情完成时，Event Table会将这个函数移入Event Queue。当指定的事情完成时，Event Table会将这个函数移入Event Queue。当指定的事情完成时，Event Table会将这个函数移入Event Queue。
+答案：1，7，6，8，2，4，3，5，9，11，10，12(请注意，node环境下的事件监听依赖libuv与前端环境不完全相同，输出顺序可能会有误差)
+
+
+## 题目八
+
 ```
 以下代码最后输出什么？
 
@@ -192,7 +272,8 @@ console.log(4);
 这一次，彻底弄懂 JavaScript 执行机制https://juejin.im/post/59e85eebf265da430d571f89。
 先执行宏任务，主script ，new Promise立即执行，输出【3】，执行 p 这个new Promise 操作，输出【7】，发现 setTimeout，将回调放入下一轮任务队列（Event Queue），p 的 then，姑且叫做 then1，放入微任务队列，发现 first 的 then，叫 then2，放入微任务队列。执行console.log(4)，输出【4】，宏任务执行结束。再执行微任务，执行 then1，输出【1】，执行 then2，输出【2】。到此为止，第一轮事件循环结束。开始执行第二轮。先执行宏任务里面的，也就是 setTimeout 的回调，输出【5】。resolve(6) 不会生效，因为 p 这个 Promise 的状态一旦改变就不会在改变了。
 
-## 题目七
+
+## 题目九
 
 ```
 有 8 个图片资源的 url，已经存储在数组 urls 中（即urls = ['http://example.com/1.jpg', ...., 'http://example.com/8.jpg']），而且已经有一个函数 function loadImg，输入一个 url 链接，返回一个 Promise，该 Promise 在图片下载完成的时候 resolve，下载失败则 reject。但是我们要求，任意时刻，同时下载的链接数量不可以超过 3 个。请写一段代码实现这个需求，要求尽可能快速地将所有图片下载完成。
@@ -216,7 +297,7 @@ function loadImg(url) {
 ```
 var urls = [
     'https://www.kkkk1000.com/images/getImgData/getImgDatadata.jpg', 'https://www.kkkk1000.com/images/getImgData/gray.gif', 'https://www.kkkk1000.com/images/getImgData/Particle.gif', 'https://www.kkkk1000.com/images/getImgData/arithmetic.png', 'https://www.kkkk1000.com/images/getImgData/arithmetic2.gif', 'https://www.kkkk1000.com/images/getImgData/getImgDataError.jpg', 'https://www.kkkk1000.com/images/getImgData/arithmetic.gif', 'https://www.kkkk1000.com/images/wxQrCode2.png'];
-    
+
 function loadImg(url) {
     return new Promise((resolve, reject) => {
         const img = new Image()
