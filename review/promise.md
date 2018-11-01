@@ -269,7 +269,6 @@ console.log(4);
 ```
 答案：3 7 4 1 2 5
 解析：这道题就其实和 Promise 的关系不太大，主要是需要理解 JS执行机制。
-这一次，彻底弄懂 JavaScript 执行机制https://juejin.im/post/59e85eebf265da430d571f89。
 先执行宏任务，主script ，new Promise立即执行，输出【3】，执行 p 这个new Promise 操作，输出【7】，发现 setTimeout，将回调放入下一轮任务队列（Event Queue），p 的 then，姑且叫做 then1，放入微任务队列，发现 first 的 then，叫 then2，放入微任务队列。执行console.log(4)，输出【4】，宏任务执行结束。再执行微任务，执行 then1，输出【1】，执行 then2，输出【2】。到此为止，第一轮事件循环结束。开始执行第二轮。先执行宏任务里面的，也就是 setTimeout 的回调，输出【5】。resolve(6) 不会生效，因为 p 这个 Promise 的状态一旦改变就不会在改变了。
 
 
