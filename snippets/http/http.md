@@ -1,7 +1,10 @@
 # HTTP 协议原理
 > HTTP Hyper Text Transfer Protocol（超文本传输协议）是一个基于请求与响应模式的、无状态的、应用层的协议，常基于TCP的连接方式，HTTP1.1版本中给出一种持续连接的机制，绝大多数的Web开发，都是构建在HTTP协议之上的Web应用。
+
 > HTTP协议是用于从WWW服务器传输超文本到本地浏览器的传送协议。它可以使浏览器更加高效，使网络传输减少。它不仅保证计算机正确快速地传输超文本文档，还确定传输文档中的哪一部分，以及哪部分内容首先显示(如文本先于图形)等。
+
 > HTTP是一个应用层协议，由请求和响应构成，是一个标准的客户端服务器模型。只能客户端发起请求，服务器回送响应。HTTP是一个无状态的协议，同一个客户端的这次请求和上次请求是没有对应关系。
+
 > HTTP协议通常承载于TCP协议之上，有时也承载于TLS或SSL协议层之上，这个时候，就成了我们常说的HTTPS。默认HTTP的端口号为80，HTTPS的端口号为443。
 
 ### 工作流程
@@ -38,12 +41,12 @@ Redirect -> App cache应用缓存 -> DNS 解析（域名对应ip地址）-> 创�
 1、get重点在从服务器上获取资源，post重点在向服务器发送数据；2、get传输数据是通过URL请求，以field（字段）= value的形式，置于URL后，并用"?"连接，多个请求数据间用"&"连接，这个过程用户是可见的；post将字段与对应值封存在请求实体中发送给服务器，这个过程对用户是不可见的；3、Get传输的数据量小，因为受URL长度限制，但效率较高；Post可以传输大量数据，所以上传文件时只能用Post方式；4、get是不安全的，因为URL是可见的，可能会泄露私密信息，如密码等；post较get安全性较高；5、get方式只能支持ASCII字符，向服务器传的中文字符可能会乱码。post支持标准字符集，可以正确传递中文字符。
 
 ### 常用的HTTP方法有哪些？
-GET： 用于请求访问已经被URI（统一资源标识符）识别的资源，可以通过URL传参给服务器。
-POST：用于传输信息给服务器，主要功能与GET方法类似，但一般推荐使用POST方式。
-PUT： 传输文件，报文主体中包含文件内容，保存到对应URI位置。
-HEAD： 获得报文首部，与GET方法类似，只是不返回报文主体，一般用于验证URI是否有效。
-DELETE：删除文件，与PUT方法相反，删除对应URI位置的文件。
-OPTIONS：查询相应URI支持的HTTP方法。
+* GET： 用于请求访问已经被URI（统一资源标识符）识别的资源，可以通过URL传参给服务器。
+* POST：用于传输信息给服务器，主要功能与GET方法类似，但一般推荐使用POST方式。
+* PUT： 传输文件，报文主体中包含文件内容，保存到对应URI位置。
+* HEAD： 获得报文首部，与GET方法类似，只是不返回报文主体，一般用于验证URI是否有效。
+* DELETE：删除文件，与PUT方法相反，删除对应URI位置的文件。
+* OPTIONS：查询相应URI支持的HTTP方法。
 
 ### http请求由三部分组成，分别是：请求行、消息报头、请求正文
 请求报文包含三部分：
@@ -82,84 +85,83 @@ Content-Range：实体主体的位置范围，一般用于发出部分请求时�
 
 ### 常见的HTTP相应状态码
 返回的状态
-1xx：Informational 指示信息--表示请求已接收，继续处理
-2xx：Success 成功--表示请求已被成功接收、理解、接受
-3xx：Redirection 重定向--信息不完整，要进行更进一步的补充
-4xx：Client Error 客户端错误--请求有语法错误或请求无法实现
-5xx：Server Error 服务器端错误--服务器未能实现合法的请求
+* 1xx：Informational 指示信息--表示请求已接收，继续处理
+* 2xx：Success 成功--表示请求已被成功接收、理解、接受
+* 3xx：Redirection 重定向--信息不完整，要进行更进一步的补充
+* 4xx：Client Error 客户端错误--请求有语法错误或请求无法实现
+* 5xx：Server Error 服务器端错误--服务器未能实现合法的请求
 
+* 100 Continue 继续, 客户端必须继续发出请求
+* 101 Switching Protocols 交换协议, 客户端要求服务器根据请求转换HTTP协议版本
+* 102 Processing 处理
 
-100 Continue 继续, 客户端必须继续发出请求
-101 Switching Protocols 交换协议, 客户端要求服务器根据请求转换HTTP协议版本
-102 Processing 处理
+* 200 OK, 请求被正常处理
+* 201 Created 创建, 提示知道新文件的URL
+* 202 Accepted 已接受, 接受和处理、但处理未完成
+* 203 Non-Authoritative Information 非授权信息, 返回信息不确定或不完整
+* 204 No Content 无内容,  请求收到，但返回信息为空
+* 205 Reset Content 重置内容, 服务器完成了请求，用户代理必须复位当前已经浏览过的文件
+* 206 Partial Content 部分内容, 服务器已经完成了部分用户的GET请求
+* 207 Multi-Status 多状态
+* 208 Already Reported 已报告
+* 226 IMIM Used 使用的
 
-200 OK, 请求被正常处理
-201 Created 创建, 提示知道新文件的URL
-202 Accepted 已接受, 接受和处理、但处理未完成
-203 Non-Authoritative Information 非授权信息, 返回信息不确定或不完整
-204 No Content 无内容,  请求收到，但返回信息为空
-205 Reset Content 重置内容, 服务器完成了请求，用户代理必须复位当前已经浏览过的文件
-206 Partial Content 部分内容, 服务器已经完成了部分用户的GET请求
-207 Multi-Status 多状态
-208 Already Reported 已报告
-226 IMIM Used 使用的
+* 300 Multiple Choices 多种选择, 请求的资源可在多处得到
+* 301 Moved Permanently , 永久性重定向, 在Location响应首部的值仍为当前URL(隐式重定向)
+* 302 Found, 临时重定向, 在Location响应首部的值仍为新的URL(显示重定向)
+* 303 See Other ,建议客户端访问其他URL或访问方式,能通过GET方法重定向到另一个URI上
+* 304 Not Modified, 请求的资源没有改变 可以继续使用缓存
+* 305 Use Proxy 使用代理
+* 306 Switch Proxy 开关代理, 前一版本HTTP中使用的代码，现行版本中不再使用
+* 307 Temporary Redirect , 临时重定向，与302类似，只是强制要求使用POST方法
+* 308 Permanent Redirect 永久重定向
 
-300 Multiple Choices 多种选择, 请求的资源可在多处得到
-301 Moved Permanently , 永久性重定向, 在Location响应首部的值仍为当前URL(隐式重定向)
-302 Found, 临时重定向, 在Location响应首部的值仍为新的URL(显示重定向)
-303 See Other ,建议客户端访问其他URL或访问方式,能通过GET方法重定向到另一个URI上
-304 Not Modified, 请求的资源没有改变 可以继续使用缓存
-305 Use Proxy 使用代理
-306 Switch Proxy 开关代理, 前一版本HTTP中使用的代码，现行版本中不再使用
-307 Temporary Redirect , 临时重定向，与302类似，只是强制要求使用POST方法
-308 Permanent Redirect 永久重定向
+* 400 Bad Request 错误的请求, 服务器不理解请求的语法
+* 401 Unauthorized 未授权, 请求要求身份验证。对于需要登录的网页，服务器可能返回此响应
+* 402 Payment Required 需要付费
+* 403Forbidden 服务器拒绝访问
+* 404 Not Found 服务器找不到请求的网页
+* 405 Method Not Allowed 不允许的方法
+* 406 Not Acceptable 不可接受
+* 407 Proxy Authentication Required 代理服务器需要身份验证, 与 401（未授权）类似，但指定请求者应当授权使用代理
+* 408 Request Timeout 请求超时
+* 409 Conflict 冲突, 服务器在完成请求时发生冲突。服务器必须在响应中包含有关冲突的信息。
+* 410 Gone 已删除, 如果请求的资源已永久删除，服务器就会返回此响应
+* 411 Length Required 需要长度, 服务器不接受不含有效内容长度标头字段的请求
+* 412 Precondition Failed 前提条件失败, 服务器未满足请求者在请求中设置的其中一个前提条件
+* 413 Payload Too Large 负载过大
+* 414 URI Too Long 太长
+* 415 Unsupported Media Type 不支持的媒体类型, 请求的格式不受请求页面的支持
+* 416 Range Not Satisfiable 的范围不合适, 如果页面无法提供请求的范围，则服务器会返回此状态代码
+* 417 Expectation Failed 预期失败, 服务器未满足"期望"请求标头字段的要求
+* 418 I'm a teapot 我是一个茶壶
+* 421 Misdirected Request 误导请求
+* 422 Unprocessable Entity 无法处理的实体
+* 423 Locked 锁定
+* 424 Failed Dependency 失败的依赖
+* 426 Upgrade Required 升级所需
+* 428 Precondition Required 所需的先决条件
+* 429 Too Many Requests 太多的请求
+* 431 Request Header Fields Too Large 请求头字段太大
+* 451 Unavailable For Legal Reasons 不可出于法律原因
 
-400 Bad Request 错误的请求, 服务器不理解请求的语法
-401 Unauthorized 未授权, 请求要求身份验证。对于需要登录的网页，服务器可能返回此响应
-402 Payment Required 需要付费
-403Forbidden 服务器拒绝访问
-404 Not Found 服务器找不到请求的网页
-405 Method Not Allowed 不允许的方法
-406 Not Acceptable 不可接受
-407 Proxy Authentication Required 代理服务器需要身份验证, 与 401（未授权）类似，但指定请求者应当授权使用代理
-408 Request Timeout 请求超时
-409 Conflict 冲突, 服务器在完成请求时发生冲突。服务器必须在响应中包含有关冲突的信息。
-410 Gone 已删除, 如果请求的资源已永久删除，服务器就会返回此响应
-411 Length Required 需要长度, 服务器不接受不含有效内容长度标头字段的请求
-412 Precondition Failed 前提条件失败, 服务器未满足请求者在请求中设置的其中一个前提条件
-413 Payload Too Large 负载过大
-414 URI Too Long 太长
-415 Unsupported Media Type 不支持的媒体类型, 请求的格式不受请求页面的支持
-416 Range Not Satisfiable 的范围不合适, 如果页面无法提供请求的范围，则服务器会返回此状态代码
-417 Expectation Failed 预期失败, 服务器未满足"期望"请求标头字段的要求
-418 I'm a teapot 我是一个茶壶
-421 Misdirected Request 误导请求
-422 Unprocessable Entity 无法处理的实体
-423 Locked 锁定
-424 Failed Dependency 失败的依赖
-426 Upgrade Required 升级所需
-428 Precondition Required 所需的先决条件
-429 Too Many Requests 太多的请求
-431 Request Header Fields Too Large 请求头字段太大
-451 Unavailable For Legal Reasons 不可出于法律原因
-
-500 Internal Server Error 内部服务器错误
-501 Not Implemented 未执行, 服务器不具备完成请求的功能。例如，服务器无法识别请求方法时可能会返回此代码
-502 Bad Gateway 错误的网关, 服务器作为网关或代理，从上游服务器收到无效响应。
-503 Service Unavailable 服务不可用, 服务器目前无法使用（由于超载或停机维护）。通常，这只是暂时状态。
-504 Gateway Timeout 网关超时, 服务器作为网关或代理，但是没有及时从上游服务器收到请求
-505 HTTP Version Not Supported 不支持HTTP版本
-506 Variant Also Negotiates 变体也进行协商
-507 Insufficient Storage 存储空间不足
-508 Loop Detected 检测到循环
-510 Not Extended 不延长
-511 Network Authentication Required 网络需要身份验证
+* 500 Internal Server Error 内部服务器错误
+* 501 Not Implemented 未执行, 服务器不具备完成请求的功能。例如，服务器无法识别请求方法时可能会返回此代码
+* 502 Bad Gateway 错误的网关, 服务器作为网关或代理，从上游服务器收到无效响应。
+* 503 Service Unavailable 服务不可用, 服务器目前无法使用（由于超载或停机维护）。通常，这只是暂时状态。
+* 504 Gateway Timeout 网关超时, 服务器作为网关或代理，但是没有及时从上游服务器收到请求
+* 505 HTTP Version Not Supported 不支持HTTP版本
+* 506 Variant Also Negotiates 变体也进行协商
+* 507 Insufficient Storage 存储空间不足
+* 508 Loop Detected 检测到循环
+* 510 Not Extended 不延长
+* 511 Network Authentication Required 网络需要身份验证
 
 
 ### URI、URL和URN
-URI：Uniform Resource Identifier，即统一资源标志符，用来唯一的标识一个资源。
-URL：Uniform Resource Locator，统一资源定位符。即URL可以用来标识一个资源，而且还指明了如何locate这个资源。
-URN：Uniform Resource Name，统一资源命名。即通过名字来表示资源的。
+* URI：Uniform Resource Identifier，即统一资源标志符，用来唯一的标识一个资源。
+* URL：Uniform Resource Locator，统一资源定位符。即URL可以用来标识一个资源，而且还指明了如何locate这个资源。
+* URN：Uniform Resource Name，统一资源命名。即通过名字来表示资源的。
 
 
 ### HTTP的缺点与HTTPS
