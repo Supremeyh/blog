@@ -176,3 +176,31 @@ HTTPS就是HTTP加上加密处理（一般是SSL安全通信线路）+认证+完
 
 ### HTTP优化
 利用负载均衡优化和加速HTTP应用；利用HTTP Cache来优化网站
+
+### curl 利用URL规则在http命令行下工作的文件传输工具。它支持文件的上传和下载的是综合传输工具，习惯称url为下载工具
+curl [option] [url]
+如 curl -v baidu.com
+```
+* Rebuilt URL to: www.baidu.com/
+*   Trying 61.135.169.125...
+* TCP_NODELAY set
+* Connected to www.baidu.com (61.135.169.125) port 80 (#0)
+> GET / HTTP/1.1
+> Host: www.baidu.com
+> User-Agent: curl/7.54.0
+> Accept: */*
+>
+< HTTP/1.1 200 OK
+< Accept-Ranges: bytes
+< Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform
+< Connection: Keep-Alive
+< Content-Length: 2381
+< Content-Type: text/html
+< Date: Mon, 26 Nov 2018 13:59:17 GMT
+< Etag: "588604c4-94d"
+< Last-Modified: Mon, 23 Jan 2017 13:27:32 GMT
+< Pragma: no-cache
+< Server: bfe/1.0.8.18
+< Set-Cookie: BDORZ=27315; max-age=86400; domain=.baidu.com; path=/
+<
+```
