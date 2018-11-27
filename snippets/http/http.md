@@ -228,6 +228,9 @@ curl [option] [url]
 * video/webm	视频文件
 * video/webm	视频文件
 * application/octet-stream 二进制数据	
-* application/javascript 
+* application/javascript  JavaScript文件或JSONP format
+* application/msword  文档类型Microsoft Word		扩展名.doc
+* application/vnd.ms-excel   文档类型Microsoft Excel	扩展名.xls	
+* application/vnd.openxmlformats-officedocument.spreadsheetml.sheet   文档类型Microsoft Excel (OpenXML)	  扩展名.xlsx	
 * multipart/form-data   Multipart 类型
 
