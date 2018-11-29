@@ -65,29 +65,32 @@ HTTP/2 帧： HTTP/2 引入了一个额外的步骤：它将 HTTP/1.x 消息分�
 
 ### 常见HTTP首部字段
 a、通用首部字段（请求报文与响应报文都会使用的首部字段）
-Date：创建报文时间
-Connection：连接的管理
-Cache-Control：缓存指令, 缓存指令是单向、独立的,响应中出现的缓存指令在请求中未必会出现,一个消息的缓存指令不会影响另一个消息处理的缓存机制。
+* Date：创建报文时间
+* Connection：连接的管理
+* Cache-Control：缓存指令, 缓存指令是单向、独立的,响应中出现的缓存指令在请求中未必会出现,一个消息的缓存指令不会影响另一个消息处理的缓存机制。
 请求时的缓存指令包括：no-cache（用于指示请求或响应消息不能缓存）、no-store、max-age、max-stale、min-fresh、only-if-cached;
 响应时的缓存指令包括：public、private、no-cache、no-store、no-transform、must-revalidate、proxy-revalidate、max-age、s-maxage.
-Transfer-Encoding：报文主体的传输编码方式
+* Transfer-Encoding：报文主体的传输编码方式
 b、请求首部字段（请求报文会使用的首部字段）
-Host：请求资源所在服务器
-Accept：可处理的媒体类型
-Accept-Charset：可接收的字符集
-Accept-Encoding：可接受的内容编码
-Accept-Language：可接受的自然语言
+* Host：请求资源所在服务器
+* Accept：可处理的媒体类型
+* Accept-Charset：可接收的字符集
+* Accept-Encoding：可接受的内容编码
+* Accept-Language：可接受的自然语言
 c、响应首部字段（响应报文会使用的首部字段）
-Accept-Ranges：可接受的字节范围
-Location：令客户端重新定向到的URI
-Server：HTTP服务器的安装信息
+* Accept-Ranges：可接受的字节范围
+* Location：令客户端重新定向到的URI
+* Server：HTTP服务器的安装信息
 d、实体首部字段（请求报文与响应报文的的实体部分使用的首部字段）
-Allow：资源可支持的HTTP方法
-Content-Type：实体主类的类型
-Content-Encoding：实体主体适用的编码方式
-Content-Language：实体主体的自然语言
-Content-Length：实体主体的的字节数
-Content-Range：实体主体的位置范围，一般用于发出部分请求时使用
+* Allow：资源可支持的HTTP方法
+* Content-Type：实体主类的类型
+* Content-Encoding：实体主体适用的编码方式
+* Content-Language：实体主体的自然语言
+* Content-Length：实体主体的的字节数
+* Content-Range：实体主体的位置范围，一般用于发出部分请求时使用
+* X-Content-Type-Options: nosiff  禁用客户端的 MIME 类型嗅探行为
+* X-Frame-OptionsEdit: DENY(表示该页面不允许在 frame 中展示，即便是在相同域名的页面中嵌套也不允许) / SAMEORIGIN(表示该页面可以在相同域名页iframe 中展示) / ALLOW-FROM uri (表示该页面可以在指定来源的 frame 中展示)
+* X-XSS-Protection: 0 (禁止XSS过滤) / 1; mode=block (当检测到跨站脚本攻击 (XSS)时，浏览器将停止加载页面)
 
 ### 协议升级机制
 HTTP协议 提供了一种特殊的机制，这一机制允许将一个已建立的连接升级成新的、不相容的协议。需要添加两项额外的header：
@@ -130,7 +133,7 @@ Upgrade: protocols， Upgrade 头指定一项或多项协议名，按优先级�
 * 400 Bad Request 错误的请求, 服务器不理解请求的语法
 * 401 Unauthorized 未授权, 请求要求身份验证。对于需要登录的网页，服务器可能返回此响应
 * 402 Payment Required 需要付费
-* 403Forbidden 服务器拒绝访问
+* 403 Forbidden 服务器拒绝访问
 * 404 Not Found 服务器找不到请求的网页
 * 405 Method Not Allowed 不允许的方法
 * 406 Not Acceptable 不可接受
