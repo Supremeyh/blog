@@ -16,4 +16,4 @@
 * application/vnd.openxmlformats-officedocument.spreadsheetml.sheet   文档类型Microsoft Excel (OpenXML)	  扩展名.xlsx	
 * multipart/form-data   Multipart 类型
 
-MIME 嗅探, 在缺失 MIME 类型或客户端认为文件设置了错误的 MIME 类型时，浏览器可能会通过查看资源来进行MIME嗅探。每一个浏览器在不同的情况下会执行不同的操作。因为这个操作会有一些安全问题，有的 MIME 类型表示可执行内容而有些是不可执行内容。浏览器可以通过请求头 Content-Type 来设置 X-Content-Type-Options 以阻止MIME嗅探。
+MIME 嗅探, 在缺失 MIME 类型或客户端认为文件设置了错误的 MIME 类型时，浏览器可能会通过查看资源来进行MIME嗅探。每一个浏览器在不同的情况下会执行不同的操作。因为这个操作会有一些安全问题，有的 MIME 类型表示可执行内容而有些是不可执行内容。浏览器可以通过请求头 Content-Type 来设置 X-Content-Type-Options: nosniff 以阻止MIME嗅探。假如请求类型为以下两种，那么阻止请求的发生："style" 但是 MIME 类型不是 "text/css"，"script" 但是 MIME 类型不是JavaScript MIME 类型。
