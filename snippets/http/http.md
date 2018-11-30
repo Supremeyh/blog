@@ -130,7 +130,7 @@ Upgrade: protocols， Upgrade 头指定一项或多项协议名，按优先级�
 * 307 Temporary Redirect , 临时重定向，与302类似，只是强制要求使用POST方法
 * 308 Permanent Redirect 永久重定向
 
-* 400 Bad Request 错误的请求, 服务器不理解请求的语法
+* 400 Bad Request 错误的请求, 服务器不理解请求的语法; 网站服务未启动
 * 401 Unauthorized 未授权, 请求要求身份验证。对于需要登录的网页，服务器可能返回此响应
 * 402 Payment Required 需要付费
 * 403 Forbidden 服务器拒绝访问
@@ -158,6 +158,7 @@ Upgrade: protocols， Upgrade 头指定一项或多项协议名，按优先级�
 * 429 Too Many Requests 太多的请求
 * 431 Request Header Fields Too Large 请求头字段太大
 * 451 Unavailable For Legal Reasons 不可出于法律原因
+* 499 网络繁忙，同一个ip过来的过多请求直接中断
 
 * 500 Internal Server Error 内部服务器错误
 * 501 Not Implemented 未执行, 服务器不具备完成请求的功能。例如，服务器无法识别请求方法时可能会返回此代码
