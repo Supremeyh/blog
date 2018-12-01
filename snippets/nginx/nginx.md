@@ -12,6 +12,7 @@ Nginx是一款轻量级的HTTP服务器，采用事件驱动的异步非阻塞�
 
 ### 组成
 > Nginx由内核和模块组成，其中，内核的设计非常微小和简洁，完成的工作也非常简单，仅仅通过查找配置文件将客户端请求映射到一个location block（location是Nginx配置中的一个指令，用于URL匹配），而在这个location中所配置的每个指令将会启动不同的模块去完成相应的工作。
+
 >Nginx的模块从结构上分为核心模块、基础模块和第三方模块：
 * 核心模块：HTTP模块、EVENT模块和MAIL模块
 * 基础模块：HTTP Access模块、HTTP FastCGI模块、HTTP Proxy模块和HTTP Rewrite模块，
