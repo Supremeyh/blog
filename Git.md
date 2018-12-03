@@ -15,3 +15,9 @@
 ### .gitignore不生效
 git rm -r --cached .  //清空缓存
 
+### tag
+> git tag,  或 git show v1.0   // 显示tag信息
+> git tag -a v1.0  -m 'first version' // 创建tag
+> git push origin v1.0 , 或者 git push origin --tags // 共享tag
+> git tag -d v1.0 // 删除tag
+
