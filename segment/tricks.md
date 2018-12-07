@@ -1,8 +1,8 @@
 
-### 选中某一项
+### vue选中某一项
 ```
 <div v-for= "(item, index) in List">
-  <p @click="currentCheckd=index" :class="{'current': currentCheckd===index}"></p>
+  <p @click="currentChecked=index" :class="{'current': currentChecked===index}"></p>
 </div>
 
 ```
