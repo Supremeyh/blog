@@ -21,3 +21,12 @@ git rm -r --cached .  //清空缓存
 > git push origin v1.0 , 或者 git push origin --tags // 共享tag
 > git tag -d v1.0 // 删除tag
 
+
+###  Permission denied (publickey).
+> cd ~/.ssh  ls  来查看是否有文件id_rsa以及文件id_rsa.pub
+> ssh-keygen -t rsa -C "supremeyh@126.com"   生成ssh key
+> ssh -v git@github.com
+> ssh-agent -s
+> ssh-add ~/.ssh/id_rsa  
+> cat id_rsa.pub   拷贝内容到github，在settings下，SSH and GPG keys下new SSH key的key 中保存
+> ssh -T git@github.com  验证key
