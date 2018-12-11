@@ -30,3 +30,8 @@ git rm -r --cached .  //清空缓存
 > ssh-add ~/.ssh/id_rsa  
 > cat id_rsa.pub   拷贝内容到github，在settings下，SSH and GPG keys下new SSH key的key 中保存
 > ssh -T git@github.com  验证key
+
+### 修改远程仓库地址
+> git remote -v  查看
+> git remote rm origin  删除
+> git remote add origin ssh://git@repository.git   新增
