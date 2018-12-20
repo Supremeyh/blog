@@ -47,3 +47,34 @@ context("A");
 context("B");
 
 
+// 代理模式： 为一个对象提供一种代理以方便对它的访问
+// 可以解决避免对一些对象的直接访问，常见的有保护代理和虚拟代理。保护代理可以在代理中直接拒绝对对象的访问；虚拟代理可以延迟访问到真正需要的时候，以节省程序开销。
+// 代理模式有高度解耦、对象保护、易修改等优点。缺点是开销会更大，时间也会更慢。
+const myImg = {
+  setSrc(imgNode, src) {
+    imgNode.src = src;
+  }
+};
+
+// 利用代理模式实现图片懒加载
+const proxyImg = {
+  setSrc(imgNode, src) {
+    myImg.setSrc(imgNode, "./image.png"); // NO1. 加载占位图片并且将图片放入<img>元素
+
+    let img = new Image();
+    img.onload = () => {
+      myImg.setSrc(imgNode, src); // NO3. 完成加载后, 更新 <img> 元素中的图片
+    };
+    img.src = src; // NO2. 加载真正需要的图片
+  }
+};
+
+let imgNode = document.createElement("img"),
+  imgSrc = "https://avatars1.githubusercontent.com/u/33623220?s=400&u=a533c464d2c67f847107ddb146da56d5b8b69ea5&v=4"
+
+document.body.appendChild(imgNode);
+
+proxyImg.setSrc(imgNode, imgSrc);
+
+
+
