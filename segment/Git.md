@@ -35,3 +35,15 @@ git rm -r --cached .  //清空缓存
 * git remote -v  查看
 * git remote rm origin  删除
 * git remote add origin ssh://git@repository.git   新增
+
+
+### 同步upstream 原始仓库
+* git remote -v
+* git remote add upstream git@github.com:Supremeyh/blog.git   配置原始仓库
+* git fetch upstream 获取原始仓库分支和对应的提交，分支dev的提交会保存到本地分支，upstream/dev
+* git checkout dev  切换到fork仓库本地的dev分支
+* git merge upstream/dev  把原始upstream/dev的改变合并到本地的dev分支
+* git push  推送自己的本地仓库到自己的origin远程仓库
+
+
+
