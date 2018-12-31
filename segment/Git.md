@@ -38,6 +38,7 @@ git rm -r --cached .  //清空缓存
 
 
 ### 同步upstream 原始仓库
+* git clone git@github.com:Supremeyh/blog.git   clone自己代码origin到本地
 * git remote -v
 * git remote add upstream git@github.com:Supremeyh/blog.git   配置原始仓库
 * git fetch upstream 获取原始仓库分支和对应的提交，分支dev的提交会保存到本地分支，upstream/dev
