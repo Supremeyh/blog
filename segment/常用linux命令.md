@@ -5,6 +5,6 @@ lsof -i:443
 netstat -tunlp | grep 8000
 
 
-// chomd 权限
+// chomd 文件权限
 // 分别表示User、Group、及Other的权限, r=4，w=2，x=1
 sudo chmod 761 file
